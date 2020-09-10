@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">another unnecessary store</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_title">За рефералку при регестрации 5к UEC в игре </string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">My board</string>
+    <string name="action_settings">Хз Зачем эта кнопка :)</string>
+
+    <string name="menu_home">Главный холл</string>
+    <string name="menu_gallery">Выставка кораблей</string>
+    <string name="menu_slideshow">Выставка транспорта</string>
+    <string name="info_weapon">Описане вооружения</string>
+    <string name="info_fit">Имба фит для тебя</string>
+    <string name="star_35rq_hyt4">STAR-35RQ-HYT4</string>
+    <string name="title_ship">Title ship</string>
+    <string name="info_ship">info_ship</string>
+    <string name="todo">TODO</string>
+</resources>
