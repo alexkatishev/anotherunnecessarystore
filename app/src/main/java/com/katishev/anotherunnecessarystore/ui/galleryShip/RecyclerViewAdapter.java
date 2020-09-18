@@ -17,12 +17,31 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter {
 
+    public RecyclerViewAdapter(RecyclerView view) {
+        mView = view;
+    }
     //данные для адаптера
     List<String> mItems = new LinkedList<>();
+    private RecyclerView mView;
 
-    public void addItem(String item) {
-        mItems.add(item);
 
+
+    public void addItem(String item, int ind) {
+        mItems.add(ind, item);
+        notifyItemInserted(ind);
+        notifyItemRangeChanged(ind + 1, mItems.size() - (ind + 1));
+    }
+
+    public void setItems(List<String> items) {
+        mItems.clear();
+        mItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void removeItem(int ind) {
+        mItems.remove(ind);
+        notifyItemRemoved(ind);
+        notifyItemRangeChanged(ind, mItems.size() - (ind));
     }
 
     @NonNull
@@ -36,6 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         return new ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
@@ -45,8 +65,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
         vh.ivItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e(this.getClass().getSimpleName(),
-                        "click" + vh.tvTitleItem.getText().toString());
+
             }
         });
 
@@ -56,20 +75,40 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         return mItems.size();
     }
+    private ViewHolder getViewHolderAt(int idx) {
+        return ((ViewHolder) mView.findViewHolderForAdapterPosition(idx));
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
+
+    @Override
+    public boolean onFailedToRecycleView(@NonNull RecyclerView.ViewHolder holder) {
+        return super.onFailedToRecycleView(holder);
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull RecyclerView.ViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
+    }
 
     private static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivItem;
-        ImageView ivProductionItem;
         TextView tvTitleItem;
         ImageView ivPriceItem;
         TextView tvInfoItem;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ivItem = itemView.findViewById(R.id.iv_item);
-            ivProductionItem = itemView.findViewById(R.id.iv_production_item);
             tvTitleItem = itemView.findViewById(R.id.tv_title_item);
             ivPriceItem = itemView.findViewById(R.id.iv_price_item);
             tvInfoItem = itemView.findViewById(R.id.tv_info_item);
