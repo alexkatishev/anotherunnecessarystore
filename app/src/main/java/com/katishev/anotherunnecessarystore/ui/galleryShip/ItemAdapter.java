@@ -19,6 +19,8 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.generateAllURL;
 import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.generateURL;
@@ -26,15 +28,22 @@ import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.g
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
-
-    private int mItemNumbers;
-
-
-    public ItemAdapter(int numberOfItem) {
-        mItemNumbers = numberOfItem;
-
+    public static class DataItem {
+        String className = null;
+        String name = null;
+        String description = null;
+        String uriWhereImage = null;
     }
+
+    private List<ItemAdapter.DataItem> mData = new LinkedList<>();
+
 // методы адаптера
+
+    public void setData(List<DataItem> data) {
+        mData.clear();
+        mData.addAll(data);
+        notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -58,7 +67,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
     @Override
     public int getItemCount() {
-        return mItemNumbers;
+        return mData.size();
     }//
 
 
@@ -69,7 +78,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         ImageView iv_item;
         TextView tv_price_item;
         TextView tv_info_item;
-
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,44 +95,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         }
 
         void bind(int listIndex) {
-            tv_title_item.setText(String.valueOf(listIndex));
+            tv_title_item.setText(mData.get(listIndex).name);
         }
 
     }
 
-    // паралельный поток выполнения
-    class QueryTask extends AsyncTask<URL, Void, String> {
-
-        @Override
-        protected String doInBackground(URL... urls) {
-            String response = null;
-            try {
-                response = getResponseFromURL(urls[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return response;
-        }
-
-        @Override
-        protected void onPostExecute(String response) {
-            String className = null;
-            String name = null;
-            String description = null;
-            String uriWhereImage = null;
-
-            try {
-                JSONObject jsonResponse = new JSONObject(response);
-
-                className = jsonResponse.getString("className");
-                name = jsonResponse.getString("name");
-                description = jsonResponse.getString("description");
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
 }

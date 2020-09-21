@@ -19,7 +19,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.getResponseFromURL;
 
@@ -44,11 +46,25 @@ public class GalleryShipFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_gallery_ship, container, false);
         galleryShip = view.findViewById(R.id.rv_fr_ship);
         galleryShip.setLayoutManager(new LinearLayoutManager(getActivity()));
-        itemAdapter =new ItemAdapter (82);
+        itemAdapter = new ItemAdapter();
         galleryShip.setAdapter(itemAdapter);
 
 
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        NetworkUtils.QueryTask task = new NetworkUtils.QueryTask();
+        task.setListener(new NetworkUtils.QueryTask.onLoadComplete() {
+            @Override
+            public void onLoadComplete(List<ItemAdapter.DataItem> data) {
+//                response;
+                itemAdapter.setData(data);
+            }
+        });
+        task.execute();
     }
 
     @Override
