@@ -1,4 +1,4 @@
-package com.katishev.anotherunnecessarystore;
+package com.katishev.anotherunnecessarystore.ui.galleryShip;
 
 import android.net.Uri;
 
@@ -12,24 +12,37 @@ import java.util.Scanner;
 
 public class NetworkUtils {
     private static final String SHOP_HOST = "http://localhost:8080";
-    private static final String GET_TEST = "/shop/get-ship/";
-    private static final String ITEM_ID = "";
-
+    private static final String GET_ONE_ITEM = "/shop/get-ship";
+    private static final String GET_ALL = "/shop/all-ships";
+    private static final String ITEM_ID = "id";
 
     public static URL generateURL(String itemId) {
 
-        Uri buildURri = Uri.parse(SHOP_HOST + GET_TEST)
+         Uri buildURri = Uri.parse(SHOP_HOST + GET_ONE_ITEM)
                 .buildUpon()
                 .appendQueryParameter(ITEM_ID, itemId)
                 .build();
 
         URL url = null;
+
         try {
             url = new URL(buildURri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         return url;
+    }
+
+    public static URL generateAllURL() {
+
+        Uri buildURri = Uri.parse(SHOP_HOST + GET_ALL).buildUpon().build();
+        URL urlAll = null;
+        try {
+            urlAll = new URL(buildURri.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return urlAll;
     }
 
     public static String getResponseFromURL(URL url) throws IOException {
@@ -47,9 +60,6 @@ public class NetworkUtils {
             }
         } finally {
             urlConnection.disconnect();
-
-
         }
-
     }
 }

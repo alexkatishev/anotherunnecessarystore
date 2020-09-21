@@ -23,20 +23,24 @@
 
         <TextView
             android:id="@+id/tv_title_item"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="monospace"
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/title_ship"
+            android:textColor="#A0522D"
             android:textSize="25sp" />
 
-        <ImageView
-            android:id="@+id/iv_price_item"
+        <TextView
+            android:id="@+id/tv_price_item"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:layout_margin="5dp"
-            android:contentDescription="@string/todo" />
+            android:contentDescription="@string/todo"
+            android:gravity="center"
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 
@@ -46,10 +50,14 @@
 
         <TextView
             android:id="@+id/tv_info_item"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:fontFamily="monospace"
             android:padding="5dp"
             android:text="@string/info_ship"
+            android:textColor="#D2B48C"
             android:textSize="25sp" />
     </ScrollView>
 </LinearLayout>
