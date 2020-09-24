@@ -16,4 +16,6 @@
     <string name="title_ship">Title ship</string>
     <string name="info_ship">info_ship</string>
     <string name="todo">TODO</string>
+    <string name="class_ship">class_ship</string>
+    <string name="in_concept">in concept</string>
 </resources>

@@ -1,30 +1,22 @@
-package com.katishev.anotherunnecessarystore.ui.galleryShip;
+package com.katishev.anotherunnecessarystore;
 
 import android.content.Context;
-import android.os.AsyncTask;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.katishev.anotherunnecessarystore.R;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
-import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.generateAllURL;
-import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.generateURL;
-import static com.katishev.anotherunnecessarystore.ui.galleryShip.NetworkUtils.getResponseFromURL;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder> {
 
@@ -32,6 +24,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         String className = null;
         String name = null;
         String description = null;
+        String price = null;
         String uriWhereImage = null;
     }
 
@@ -53,8 +46,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(layoutIdForListItem, parent, false);
 
-             ItemViewHolder viewHolder = new ItemViewHolder(view);
-        viewHolder.tv_info_item.setText("viewHolder index");
+        ItemViewHolder viewHolder = new ItemViewHolder(view);
+
 
         return viewHolder;
 
@@ -63,6 +56,14 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
     @Override
     public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
         holder.bind(position);
+        ImageView imageView = holder.iv_item;
+
+        Picasso.get()
+                .load(mData.get(position).uriWhereImage)
+                .memoryPolicy(MemoryPolicy.NO_CACHE)
+                .into(imageView);
+
+
     } // меняем значения в элементах списка View Holder
 
     @Override
@@ -78,6 +79,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
         ImageView iv_item;
         TextView tv_price_item;
         TextView tv_info_item;
+        TextView tv_class_item;
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -85,6 +87,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
             tv_title_item = itemView.findViewById(R.id.tv_title_item);
             iv_item = itemView.findViewById(R.id.iv_item);
             tv_price_item = itemView.findViewById(R.id.tv_price_item);
+            tv_class_item = itemView.findViewById(R.id.tv_class_item);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,8 +99,12 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ItemViewHolder
 
         void bind(int listIndex) {
             tv_title_item.setText(mData.get(listIndex).name);
-        }
+            tv_price_item.setText(mData.get(listIndex).price);
+            tv_class_item.setText(mData.get(listIndex).className);
+            tv_info_item.setText(mData.get(listIndex).description);
 
+        }
     }
 
 }
+

@@ -1,4 +1,4 @@
-package com.katishev.anotherunnecessarystore.ui.galleryShip;
+package com.katishev.anotherunnecessarystore;
 
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -18,38 +18,36 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    private static final String SHOP_HOST = "https://oem-8b591964.localhost.run";
-    private static final String GET_ONE_ITEM = "/shop/get-ship";
-    private static final String GET_ALL = "/shop/all-ships";
+    private static final String SHOP_HOST = "http://oem-17680eaf.localhost.run";
+    private static final String GET_ALL_VEHICLE = "/shop/get-ship";
+    private static final String GET_ALL_SHIPS = "/shop/all-ships";
     private static final String ITEM_ID = "id";
 
-    public static URL generateURL(String itemId) {
+    public static URL generateAllVehicleURL() {
 
-         Uri buildURri = Uri.parse(SHOP_HOST + GET_ONE_ITEM)
-                .buildUpon()
-                .appendQueryParameter(ITEM_ID, itemId)
-                .build();
+        Uri buildURri = Uri.parse(SHOP_HOST + GET_ALL_VEHICLE).buildUpon().build();
 
-        URL url = null;
+        URL urlAllVehicle = null;
 
         try {
-            url = new URL(buildURri.toString());
+            urlAllVehicle = new URL(buildURri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return url;
+        return urlAllVehicle;
     }
 
-    public static URL generateAllURL() {
+    public static URL generateAllShipsURL() {
 
-        Uri buildURri = Uri.parse(SHOP_HOST + GET_ALL).buildUpon().build();
-        URL urlAll = null;
+        Uri buildURri = Uri.parse(SHOP_HOST + GET_ALL_SHIPS).buildUpon().build();
+        URL urlAllShips = null;
         try {
-            urlAll = new URL(buildURri.toString());
+            urlAllShips = new URL(buildURri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        return urlAll;
+        return urlAllShips;
+
     }
 
     public static String getResponseFromURL(URL url) throws IOException {
@@ -73,38 +71,31 @@ public class NetworkUtils {
     // паралельный поток выполнения
     public static class QueryTask extends AsyncTask<Void, Void, String> {
 
-        interface onLoadComplete {
+        public interface onLoadComplete {
             void onLoadComplete(List<ItemAdapter.DataItem> dataList);
         }
 
         private onLoadComplete mListener;
 
-        void setListener(onLoadComplete listener) {
+        public void setListener(onLoadComplete listener) {
             mListener = listener;
         }
 
         @Override
         protected String doInBackground(Void... voids) {
-//            List<URL> urls = new LinkedList<>();
-//            for (int i = 0; i < itemsCound; ++i) {
-//                urls.add(generateURL("TODO: add id here"));
-//            }
 
-            String response = null;
+            String responseFromURL = null;
             try {
-                response = getResponseFromURL(generateAllURL());
+                responseFromURL = getResponseFromURL(generateAllShipsURL());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return response;
+            return responseFromURL;
         }
 
         @Override
         protected void onPostExecute(String response) {
-            String className = null;
-            String name = null;
-            String description = null;
-            String uriWhereImage = null;
+
 
             try {
                 JSONArray jsonResponse = new JSONArray(response);
@@ -115,6 +106,8 @@ public class NetworkUtils {
                     item.className = obj.getString("className");
                     item.name = obj.getString("name");
                     item.description = obj.getString("description");
+                    item.price = obj.getString("price");
+                    item.uriWhereImage = obj.getString("uri");
                     dataList.add(item);
                 }
 
@@ -123,7 +116,6 @@ public class NetworkUtils {
                 e.printStackTrace();
             }
         }
-
     }
 
 }
