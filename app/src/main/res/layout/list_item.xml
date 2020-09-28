@@ -71,12 +71,12 @@
         android:id="@+id/tv_info_item"
         style="@style/TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:gravity="center"
         android:fontFamily="monospace"
         android:padding="5dp"
         android:text="@string/info_ship"
         android:textColor="#D2B48C"
-        android:textSize="15sp" />
+        android:textSize="12sp" />
 
 </LinearLayout>

@@ -18,12 +18,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    private static final String SHOP_HOST = "http://oem-17680eaf.localhost.run";
-    private static final String GET_ALL_VEHICLE = "/shop/get-ship";
+    private static final String SHOP_HOST = "http://oem-8a1478e1.localhost.run";
+    private static final String GET_ALL_VEHICLE = "/shop/all-vehicles";
     private static final String GET_ALL_SHIPS = "/shop/all-ships";
     private static final String ITEM_ID = "id";
 
-    public static URL generateAllVehicleURL() {
+    public static URL generateAllGroundURL() {
 
         Uri buildURri = Uri.parse(SHOP_HOST + GET_ALL_VEHICLE).buildUpon().build();
 
@@ -69,7 +69,7 @@ public class NetworkUtils {
     }
 
     // паралельный поток выполнения
-    public static class QueryTask extends AsyncTask<Void, Void, String> {
+    public static class QueryTaskShip extends AsyncTask<Void, Void, String> {
 
         public interface onLoadComplete {
             void onLoadComplete(List<ItemAdapter.DataItem> dataList);
@@ -84,18 +84,19 @@ public class NetworkUtils {
         @Override
         protected String doInBackground(Void... voids) {
 
-            String responseFromURL = null;
+            String responseFromShipURL = null;
+
             try {
-                responseFromURL = getResponseFromURL(generateAllShipsURL());
+                responseFromShipURL = getResponseFromURL(generateAllShipsURL());
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return responseFromURL;
+            return responseFromShipURL;
         }
+
 
         @Override
         protected void onPostExecute(String response) {
-
 
             try {
                 JSONArray jsonResponse = new JSONArray(response);
@@ -118,4 +119,53 @@ public class NetworkUtils {
         }
     }
 
+    public static class QueryTaskGround extends AsyncTask<Void, Void, String> {
+
+        public interface onLoadComplete {
+            void onLoadComplete(List<ItemAdapter.DataItem> dataList);
+        }
+
+        private onLoadComplete mListener;
+
+        public void setListener(onLoadComplete listener) {
+            mListener = listener;
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            String responseFromGroundURL = null;
+
+            try {
+                responseFromGroundURL = getResponseFromURL(generateAllGroundURL());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return responseFromGroundURL;
+        }
+
+
+        @Override
+        protected void onPostExecute(String response) {
+
+            try {
+                JSONArray jsonResponse = new JSONArray(response);
+                List<ItemAdapter.DataItem> dataList = new LinkedList<>();
+                for (int i = 0; i < jsonResponse.length(); ++i) {
+                    JSONObject obj = jsonResponse.getJSONObject(i);
+                    ItemAdapter.DataItem item = new ItemAdapter.DataItem();
+                    item.className = obj.getString("className");
+                    item.name = obj.getString("name");
+                    item.description = obj.getString("description");
+                    item.price = obj.getString("price");
+                    item.uriWhereImage = obj.getString("uri");
+                    dataList.add(item);
+                }
+
+                mListener.onLoadComplete(dataList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

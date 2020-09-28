@@ -16,13 +16,17 @@ import com.katishev.anotherunnecessarystore.ItemAdapter;
 import com.katishev.anotherunnecessarystore.NetworkUtils;
 import com.katishev.anotherunnecessarystore.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 
 public class GalleryShipFragment extends Fragment {
 
 
+    @NotNull
     private RecyclerView galleryShip;
+    @NotNull
     private ItemAdapter itemAdapter;
 
 
@@ -31,6 +35,7 @@ public class GalleryShipFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gallery_ship, container, false);
@@ -46,10 +51,10 @@ public class GalleryShipFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        NetworkUtils.QueryTask task = new NetworkUtils.QueryTask();
-        task.setListener(new NetworkUtils.QueryTask.onLoadComplete() {
+        NetworkUtils.QueryTaskShip task = new NetworkUtils.QueryTaskShip();
+        task.setListener(new NetworkUtils.QueryTaskShip.onLoadComplete() {
             @Override
-            public void onLoadComplete(List<ItemAdapter.DataItem> data) {
+            public void onLoadComplete(@NotNull List<ItemAdapter.DataItem> data) {
                 itemAdapter.setData(data);
             }
         });
