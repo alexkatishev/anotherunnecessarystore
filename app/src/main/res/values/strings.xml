@@ -2,20 +2,24 @@
     <string name="app_name">another unnecessary store</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_title">За рефералку при регестрации 5к UEC в игре </string>
+    <string name="nav_title">Спасибо что посетили мою выставку </string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">My board</string>
-    <string name="action_settings">Хз Зачем эта кнопка :)</string>
-
+    <string name="action_settings">Хз Зачем эта кнопка :) т.к настраивать пока нечего</string>
+    <string name="error_msg">Вероятно выставка сейчас закрыта, зайдите позже</string>
     <string name="menu_home">Главный холл</string>
     <string name="menu_gallery">Выставка кораблей</string>
     <string name="menu_slideshow">Выставка транспорта</string>
-    <string name="info_weapon">Описане вооружения</string>
-    <string name="info_fit">Имба фит для тебя</string>
+    <string name="info_weapon">Описание вооружений</string>
+    <string name="info_fit">Описание компонентов</string>
     <string name="star_35rq_hyt4">STAR-35RQ-HYT4</string>
     <string name="title_ship">Title ship</string>
     <string name="info_ship">info_ship</string>
     <string name="todo">TODO</string>
     <string name="class_ship">class_ship</string>
     <string name="in_concept">in concept</string>
+    <string name="stanton">Добро пожаловать в систему Stanton. В данный момент это единственная система в игре, но по моему мнению даже сейчас тут есть чем заняться</string>
+    <string name="grimhex">В системе масса разных интересных мест. Вот например пиратская гавань GrimHEX.</string>
+    <string name="avenger_titan">Советую начинать играть с Avenger Titan - это надежный многоцелевой корабль</string>
+    <string name="hallo_my">Привет! Увидимся на GrimHEX. Я ж не легальный торговец :)</string>
 </resources>

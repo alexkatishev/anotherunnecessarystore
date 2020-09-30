@@ -29,7 +29,6 @@ public class GalleryShipFragment extends Fragment {
     @NotNull
     private ItemAdapter itemAdapter;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

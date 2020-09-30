@@ -13,15 +13,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    private static final String SHOP_HOST = "http://oem-8a1478e1.localhost.run";
+    private static final String SHOP_HOST = "http://oem-642a8ca8.localhost.run";
     private static final String GET_ALL_VEHICLE = "/shop/all-vehicles";
     private static final String GET_ALL_SHIPS = "/shop/all-ships";
     private static final String ITEM_ID = "id";
+
 
     public static URL generateAllGroundURL() {
 
@@ -63,6 +65,8 @@ public class NetworkUtils {
             } else {
                 return null;
             }
+        } catch (UnknownHostException e) {
+            return null;
         } finally {
             urlConnection.disconnect();
         }
@@ -97,26 +101,28 @@ public class NetworkUtils {
 
         @Override
         protected void onPostExecute(String response) {
+            if (response != null && !response.equals("")) {
+                try {
+                    JSONArray jsonResponse = new JSONArray(response);
+                    List<ItemAdapter.DataItem> dataList = new LinkedList<>();
+                    for (int i = 0; i < jsonResponse.length(); ++i) {
+                        JSONObject obj = jsonResponse.getJSONObject(i);
+                        ItemAdapter.DataItem item = new ItemAdapter.DataItem();
+                        item.className = obj.getString("className");
+                        item.name = obj.getString("name");
+                        item.description = obj.getString("description");
+                        item.price = obj.getString("price");
+                        item.uriWhereImage = obj.getString("uri");
+                        dataList.add(item);
+                    }
 
-            try {
-                JSONArray jsonResponse = new JSONArray(response);
-                List<ItemAdapter.DataItem> dataList = new LinkedList<>();
-                for (int i = 0; i < jsonResponse.length(); ++i) {
-                    JSONObject obj = jsonResponse.getJSONObject(i);
-                    ItemAdapter.DataItem item = new ItemAdapter.DataItem();
-                    item.className = obj.getString("className");
-                    item.name = obj.getString("name");
-                    item.description = obj.getString("description");
-                    item.price = obj.getString("price");
-                    item.uriWhereImage = obj.getString("uri");
-                    dataList.add(item);
+                    mListener.onLoadComplete(dataList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                mListener.onLoadComplete(dataList);
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
+
     }
 
     public static class QueryTaskGround extends AsyncTask<Void, Void, String> {
@@ -147,25 +153,30 @@ public class NetworkUtils {
 
         @Override
         protected void onPostExecute(String response) {
+            if (response != null && !response.equals("")) {
+                try {
+                    JSONArray jsonResponse = new JSONArray(response);
+                    List<ItemAdapter.DataItem> dataList = new LinkedList<>();
+                    for (int i = 0; i < jsonResponse.length(); ++i) {
+                        JSONObject obj = jsonResponse.getJSONObject(i);
+                        ItemAdapter.DataItem item = new ItemAdapter.DataItem();
+                        item.className = obj.getString("className");
+                        item.name = obj.getString("name");
+                        item.description = obj.getString("description");
+                        item.price = obj.getString("price");
+                        item.uriWhereImage = obj.getString("uri");
+                        dataList.add(item);
+                    }
 
-            try {
-                JSONArray jsonResponse = new JSONArray(response);
-                List<ItemAdapter.DataItem> dataList = new LinkedList<>();
-                for (int i = 0; i < jsonResponse.length(); ++i) {
-                    JSONObject obj = jsonResponse.getJSONObject(i);
-                    ItemAdapter.DataItem item = new ItemAdapter.DataItem();
-                    item.className = obj.getString("className");
-                    item.name = obj.getString("name");
-                    item.description = obj.getString("description");
-                    item.price = obj.getString("price");
-                    item.uriWhereImage = obj.getString("uri");
-                    dataList.add(item);
+                    mListener.onLoadComplete(dataList);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-
-                mListener.onLoadComplete(dataList);
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
+
+
         }
+
     }
+
 }
