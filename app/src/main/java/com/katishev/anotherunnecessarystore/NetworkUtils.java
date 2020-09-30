@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class NetworkUtils {
-    private static final String SHOP_HOST = "http://oem-642a8ca8.localhost.run";
+    private static final String SHOP_HOST = "http://oem-95ee281f.localhost.run";
     private static final String GET_ALL_VEHICLE = "/shop/all-vehicles";
     private static final String GET_ALL_SHIPS = "/shop/all-ships";
     private static final String ITEM_ID = "id";

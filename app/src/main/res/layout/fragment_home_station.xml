@@ -7,14 +7,17 @@
     android:orientation="vertical"
     tools:context=".ui.homeStation.HomeStationFragment">
 
-
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:scaleType="center"
             android:background="@drawable/iv_system" />
 
         <TextView
@@ -27,12 +30,16 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:scaleType="center"
             android:background="@drawable/iv_grim_hex" />
 
         <TextView
@@ -44,12 +51,16 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:scaleType="center"
             android:background="@drawable/iv_my_ship" />
 
         <TextView
@@ -62,12 +73,16 @@
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:scaleX="1.0"
+            android:scaleY="1.0"
+            android:scaleType="center"
             android:background="@drawable/iv_my_foto" />
 
         <TextView
