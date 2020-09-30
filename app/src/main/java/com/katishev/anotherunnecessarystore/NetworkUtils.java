@@ -77,6 +77,7 @@ public class NetworkUtils {
 
         public interface onLoadComplete {
             void onLoadComplete(List<ItemAdapter.DataItem> dataList);
+            void onLoadFailed();
         }
 
         private onLoadComplete mListener;

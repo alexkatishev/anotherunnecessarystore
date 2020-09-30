@@ -26,6 +26,7 @@ public class GalleryShipFragment extends Fragment {
 
     @NotNull
     private RecyclerView galleryShip;
+    private View noInternetTv;
     @NotNull
     private ItemAdapter itemAdapter;
 
@@ -39,6 +40,7 @@ public class GalleryShipFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_gallery_ship, container, false);
         galleryShip = view.findViewById(R.id.rv_fr_ship);
+        noInternetTv = view.findViewById(R.id.tv_no_internet);
         galleryShip.setLayoutManager(new LinearLayoutManager(getActivity()));
         itemAdapter = new ItemAdapter();
         galleryShip.setAdapter(itemAdapter);
@@ -47,14 +49,32 @@ public class GalleryShipFragment extends Fragment {
         return view;
     }
 
+    private void showData(boolean show) {
+        if (show) {
+            noInternetTv.setVisibility(View.INVISIBLE);
+            galleryShip.setVisibility(View.VISIBLE);
+        } else {
+            noInternetTv.setVisibility(View.VISIBLE);
+            galleryShip.setVisibility(View.INVISIBLE);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        showData(false);
+
         NetworkUtils.QueryTaskShip task = new NetworkUtils.QueryTaskShip();
         task.setListener(new NetworkUtils.QueryTaskShip.onLoadComplete() {
             @Override
             public void onLoadComplete(@NotNull List<ItemAdapter.DataItem> data) {
                 itemAdapter.setData(data);
+                showData(true);
+            }
+
+            @Override
+            public void onLoadFailed() {
+                showData(false);
             }
         });
         task.execute();
