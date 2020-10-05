@@ -27,6 +27,7 @@ public class GalleryGroundFragment extends Fragment {
     private RecyclerView galleryGround;
     @NotNull
     private ItemAdapter itemAdapter;
+    private View noInternetTv;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,19 +41,38 @@ public class GalleryGroundFragment extends Fragment {
         galleryGround = view.findViewById(R.id.rv_fr_ground);
         galleryGround.setLayoutManager(new LinearLayoutManager(getActivity()));
         itemAdapter = new ItemAdapter();
+        noInternetTv = view.findViewById(R.id.tv_no_internet);
         galleryGround.setAdapter(itemAdapter);
 
         return view;
     }
 
+    private void showData(boolean show) {
+        if (show) {
+            noInternetTv.setVisibility(View.INVISIBLE);
+            galleryGround.setVisibility(View.VISIBLE);
+        } else {
+            noInternetTv.setVisibility(View.VISIBLE);
+            galleryGround.setVisibility(View.INVISIBLE);
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
+        showData(false);
+
         NetworkUtils.QueryTaskGround task = new NetworkUtils.QueryTaskGround();
         task.setListener(new NetworkUtils.QueryTaskGround.onLoadComplete() {
             @Override
             public void onLoadComplete(@NotNull List<ItemAdapter.DataItem> data) {
                 itemAdapter.setData(data);
+                showData(true);
+            }
+
+            @Override
+            public void onLoadFailed() {
+                showData(false);
             }
         });
         task.execute();

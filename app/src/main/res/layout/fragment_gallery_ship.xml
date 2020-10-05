@@ -21,7 +21,7 @@
         android:gravity="center"
         android:padding="20dp"
         android:textSize="30sp"
-        android:text="You need internet connection to be able to view data" />
+        android:text="@string/error_msg" />
 
 
 </FrameLayout>

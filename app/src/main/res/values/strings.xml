@@ -6,7 +6,7 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">My board</string>
     <string name="action_settings">Хз Зачем эта кнопка :) т.к настраивать пока нечего</string>
-    <string name="error_msg">Вероятно выставка сейчас закрыта, зайдите позже</string>
+    <string name="error_msg">Вероятно выставка сейчас закрыта или просто нет интернет</string>
     <string name="menu_home">Главный холл</string>
     <string name="menu_gallery">Выставка кораблей</string>
     <string name="menu_slideshow">Выставка транспорта</string>
@@ -21,5 +21,5 @@
     <string name="stanton">Добро пожаловать в систему Stanton. В данный момент это единственная система в игре, но по моему мнению даже сейчас тут есть чем заняться</string>
     <string name="grimhex">В системе масса разных интересных мест. Вот например пиратская гавань GrimHEX.</string>
     <string name="avenger_titan">Советую начинать играть с Avenger Titan - это надежный многоцелевой корабль</string>
-    <string name="hallo_my">Привет! Увидимся на GrimHEX. Я ж не легальный торговец :)</string>
+    <string name="hallo_my">Привет! Увидимся на GrimHEX. Я же нелегальный торговец :)</string>
 </resources>

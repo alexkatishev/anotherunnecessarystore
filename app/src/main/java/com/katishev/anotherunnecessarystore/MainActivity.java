@@ -1,6 +1,7 @@
 package com.katishev.anotherunnecessarystore;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 
 import static android.content.Intent.ACTION_SEND;
+import static android.content.Intent.ACTION_SENDTO;
 import static android.content.Intent.EXTRA_EMAIL;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,10 +43,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Написать", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent mailIntent = new Intent(ACTION_SEND);
-                                mailIntent.putExtra(EXTRA_EMAIL,
-                                        new String[]{"katishevalex@gmail.com"});
-                                startActivity(Intent.createChooser(mailIntent,"выбрать"));
+                                Intent emailIntent = new Intent(Intent.ACTION_SENDTO,
+                                        Uri.fromParts("mailto",
+                                                "katishevalex@gmail.com", null));
+                                startActivity(Intent.createChooser(emailIntent, "выбрать"));
 
                             }
                         }).show();
