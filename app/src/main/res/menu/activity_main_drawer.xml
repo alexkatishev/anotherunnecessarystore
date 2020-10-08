@@ -11,11 +11,11 @@
         <item
             android:id="@+id/nav_gallery_ships"
             android:icon="@drawable/ic_spaceship"
-            android:title="@string/menu_gallery" />
+            android:title="@string/gallery_ships" />
         <item
             android:id="@+id/nav_gallery_ground"
             android:icon="@drawable/ic_space_car"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/gallery_ground" />
         <item
         android:id="@+id/nav_info_weapon"
         android:icon="@drawable/ic_ray_gun"

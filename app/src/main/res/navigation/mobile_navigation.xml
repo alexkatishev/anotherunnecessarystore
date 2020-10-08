@@ -14,12 +14,24 @@
     <fragment
         android:id="@+id/nav_gallery_ships"
         android:name="com.katishev.anotherunnecessarystore.ui.galleryShip.GalleryShipFragment"
-        android:label="@string/menu_gallery"
+        android:label="@string/gallery_ships"
         tools:layout="@layout/fragment_gallery_ship" />
 
     <fragment
         android:id="@+id/nav_gallery_ground"
         android:name="com.katishev.anotherunnecessarystore.ui.galletyGround.GalleryGroundFragment"
-        android:label="@string/menu_slideshow"
+        android:label="@string/gallery_ground"
         tools:layout="@layout/fragment_gallery_ground" />
+
+    <fragment
+        android:id="@+id/nav_info_weapon"
+        android:name="com.katishev.anotherunnecessarystore.ui.weaponInfo.FragmentScrollWeapon"
+        android:label="@string/info_weapon"
+        tools:layout="@layout/fragment_scroll_weapon" />
+
+    <fragment
+        android:id="@+id/nav_info_fit_ship"
+        android:name="com.katishev.anotherunnecessarystore.ui.fitInfo.FragmentScrollFit"
+        android:label="@string/info_fit"
+        tools:layout="@layout/fragment_scroll_fit" />
 </navigation>

@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
+        mAppBarConfiguration = new AppBarConfiguration.Builder(R.id.nav_info_fit_ship,R.id.nav_info_weapon,
                 R.id.nav_home_station, R.id.nav_gallery_ships, R.id.nav_gallery_ground)
                 .setDrawerLayout(drawer)
                 .build();
