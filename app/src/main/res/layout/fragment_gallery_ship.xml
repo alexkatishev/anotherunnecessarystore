@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.galleryShip.GalleryShipFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_fr_ship"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
         android:gravity="center"
         android:padding="20dp"
         android:textSize="30sp"
-        android:text="@string/error_msg" />
-
-
+        android:text="@string/error_msg"
+        android:visibility="invisible"/>
 </FrameLayout>
