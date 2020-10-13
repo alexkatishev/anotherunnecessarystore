@@ -18,6 +18,9 @@ class FragmentScrollFit extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_scroll_fit, container, false);
+
+           View view = inflater.inflate(R.layout.fragment_scroll_fit, container, false);
+            return  view;
+
     }
 }

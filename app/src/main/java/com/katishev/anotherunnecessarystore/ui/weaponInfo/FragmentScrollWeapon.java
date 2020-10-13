@@ -26,8 +26,9 @@ class FragmentScrollWeapon extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         infoScrollWeapon = getView().findViewById(R.id.tv_scroll_info_weapon);
-        try(Scanner scanner =new Scanner(inputStream).useDelimiter("")){
-          infoScrollWeapon.setText( scanner.hasNext() ? scanner.next() : ""); }
+        try(Scanner scanner = new Scanner(inputStream).useDelimiter("")){
+          infoScrollWeapon.setText( scanner.hasNext() ? scanner.next() : "");
+        }
         try {
          inputStream = getActivity().getAssets().open("info_weapon.xml");
 
@@ -42,6 +43,7 @@ class FragmentScrollWeapon extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_scroll_weapon, container, false);
+        View view = inflater.inflate(R.layout.fragment_scroll_weapon, container, false);
+    return view;
     }
 }

@@ -22,8 +22,6 @@ public class NetworkUtils {
     private static final String SHOP_HOST = "http://oem-2a41d10f.localhost.run";
     private static final String GET_ALL_VEHICLE = "/shop/all-vehicles";
     private static final String GET_ALL_SHIPS = "/shop/all-ships";
-    private static final String ITEM_ID = "id";
-
 
     public static URL generateAllGroundURL() {
 
